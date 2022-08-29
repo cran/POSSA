@@ -341,7 +341,7 @@ examples that cannot be done with previous common software.</p>
 <div id="unequal-variances" class="section level3">
 <h3>Unequal variances</h3>
 <p>This is a relatively small modification of the first t-test examples
-given in the <a href="https://gasparl.github.io/possa/vignettes/intro.html">introduction</a>:
+given in the <a href="https://gasparl.github.io/possa/vignettes/v_1_intro.html">introduction</a>:
 Here it’s <a href="https://doi.org/10.5334/irsp.82">Welch’s test</a>
 expecting unequal variances. The effect sizes and total samples are
 always the same as in the intro examples, for the easier comparison.</p>
@@ -629,10 +629,17 @@ function. (Again, some wrapper function such as <code>ez::ezANOVA</code>
 could be used for readability, but this would make the simulation
 somewhat slower. However, if speed is of not much importance, those
 wrapper functions work just as well.)</p>
-<p>The way of extracting p values from the output
-(e.g. <code>aov_h0[[1]][[1]][[&#39;Pr(&gt;F)&#39;]][1]</code>) also look quite
-extraordinary, but this is just how <code>aov()</code> <a href="https://stackoverflow.com/questions/3366506/extract-p-value-from-aov">stores</a>
-this information.</p>
+<p>The way of extracting p values from the output (e.g.,
+<code>aov_sum[[1]][[1]][[&#39;Pr(&gt;F)&#39;]][1]</code>, where
+<code>aov_sum = summary(aov(...))</code>) also look quite extraordinary,
+but this is just how <code>aov()</code> <a href="https://stackoverflow.com/questions/3366506/extract-p-value-from-aov">stores</a>
+this information. You can also use the <code>POSSA::get_p()</code>
+function to get more readable code (e.g.,
+<code>aov_ps = get_p(aov(...))</code>, then
+<code>aov_ps$``Error:id``$voice</code>); though over many iterations
+this too adds a little bit of extra processing time. In either case,
+make sure you are extracting the correct p values (e.g., compare the
+values with the printed results of <code>summary(aov(...))</code>).</p>
 <p>Apart from the ANOVA, the function below also includes some specific
 pair-wise comparisons, namely, comparing the <strong>robot</strong> and
 <strong>human</strong> ratings separately in the cases of
@@ -815,7 +822,7 @@ power and T1ER. This can be done e.g. as below.</p>
 <span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Likelihoods of significance if H0 true: (1) .19322; (2) .15704; (3) .14487</span></span>
 <span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Likelihoods of significance if H1 true: (1) .10598; (2) .19667; (3) .21051</span></span>
 <span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Futility bounds: none</span></span></code></pre></div>
-<p>Again, any different sample sizes could also be <a href="https://gasparl.github.io/possa/vignettes/intro.html">specified</a>
+<p>Again, any different sample sizes could also be <a href="https://gasparl.github.io/possa/vignettes/v_1_intro.html">specified</a>
 for each of the two groups via <code>n_obs</code>
 (e.g. <code>n_obs = list(grp_1 = c(10, 15, 30), grp_2 = c(20, 45, 60))</code>).</p>
 </div>

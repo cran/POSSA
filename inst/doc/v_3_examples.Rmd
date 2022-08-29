@@ -2,7 +2,7 @@
 title: "Practical examples (unequal variances; ranked data; ANOVA; DeLong's test)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{examples}
+  %\VignetteIndexEntry{v_3_examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,7 +23,7 @@ library('POSSA')
 
 ### Unequal variances
 
-This is a relatively small modification of the first t-test examples given in the [introduction](https://gasparl.github.io/possa/vignettes/intro.html): Here it's [Welch's test](https://doi.org/10.5334/irsp.82) expecting unequal variances. The effect sizes and total samples are always the same as in the intro examples, for the easier comparison.
+This is a relatively small modification of the first t-test examples given in the [introduction](https://gasparl.github.io/possa/vignettes/v_1_intro.html): Here it's [Welch's test](https://doi.org/10.5334/irsp.82) expecting unequal variances. The effect sizes and total samples are always the same as in the intro examples, for the easier comparison.
 
 First, a function to have some added information along with the Welch's test p value.
 
@@ -297,7 +297,7 @@ sampleAOV = function(samp_size) {
 
 Now the testing function will require a data frame to be constructed from the passed variables, to be appropriate for the `aov()` function. (Again, some wrapper function such as `ez::ezANOVA` could be used for readability, but this would make the simulation somewhat slower. However, if speed is of not much importance, those wrapper functions work just as well.)
 
-The way of extracting p values from the output (e.g. `aov_h0[[1]][[1]][['Pr(>F)']][1]`) also look quite extraordinary, but this is just how `aov()` [stores](https://stackoverflow.com/questions/3366506/extract-p-value-from-aov) this information.
+The way of extracting p values from the output (e.g., `aov_sum[[1]][[1]][['Pr(>F)']][1]`, where `aov_sum = summary(aov(...))`) also look quite extraordinary, but this is just how `aov()` [stores](https://stackoverflow.com/questions/3366506/extract-p-value-from-aov) this information. You can also use the `POSSA::get_p()` function to get more readable code (e.g., `aov_ps = get_p(aov(...))`, then `aov_ps$``Error:id``$voice`); though over many iterations this too adds a little bit of extra processing time. In either case, make sure you are extracting the correct p values (e.g., compare the values with the printed results of `summary(aov(...))`).
 
 Apart from the ANOVA, the function below also includes some specific pair-wise comparisons, namely, comparing the **robot** and **human** ratings separately in the cases of **sad** and **happy** voice.
 
@@ -484,7 +484,7 @@ pow(
 #> Futility bounds: none
 ```
 
-Again, any different sample sizes could also be [specified](https://gasparl.github.io/possa/vignettes/intro.html) for each of the two groups via `n_obs` (e.g. `n_obs = list(grp_1 = c(10, 15, 30), grp_2 = c(20, 45, 60))`).
+Again, any different sample sizes could also be [specified](https://gasparl.github.io/possa/vignettes/v_1_intro.html) for each of the two groups via `n_obs` (e.g. `n_obs = list(grp_1 = c(10, 15, 30), grp_2 = c(20, 45, 60))`).
 
 ### DeLong's test
 
